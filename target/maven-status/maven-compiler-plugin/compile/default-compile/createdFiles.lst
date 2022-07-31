@@ -1,0 +1,9 @@
+com\projects\moviesapp\components\MovieDetailsComponent.class
+com\projects\moviesapp\configuration\JpaConfiguration.class
+com\projects\moviesapp\models\MovieDetails_.class
+com\projects\moviesapp\services\impl\MovieDetailsImplementation.class
+com\projects\moviesapp\MoviesApp.class
+com\projects\moviesapp\dao\MovieDetailsDAO.class
+com\projects\moviesapp\services\MovieDetailsService.class
+com\projects\moviesapp\models\MovieDetails.class
+com\projects\moviesapp\controllers\AppController.class

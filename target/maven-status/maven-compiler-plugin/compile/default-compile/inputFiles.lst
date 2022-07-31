@@ -1,0 +1,14 @@
+D:\Workspace\Applications\MoviesApp\src\main\java\com\projects\moviesapp\apimodels\MovieDetailsResponse.java
+D:\Workspace\Applications\MoviesApp\src\main\java\com\projects\moviesapp\components\MovieDetailsComponent.java
+D:\Workspace\Applications\MoviesApp\src\main\java\com\projects\moviesapp\apimodels\Ratings.java
+D:\Workspace\Applications\MoviesApp\src\main\java\com\projects\moviesapp\configuration\JpaConfiguration.java
+D:\Workspace\Applications\MoviesApp\src\main\java\com\projects\moviesapp\dao\MovieDetailsDAO.java
+D:\Workspace\Applications\MoviesApp\src\main\java\com\projects\moviesapp\MoviesApp.java
+D:\Workspace\Applications\MoviesApp\src\main\java\com\projects\moviesapp\reqresmodels\MovieSearchResponse.java
+D:\Workspace\Applications\MoviesApp\src\main\java\com\projects\moviesapp\configuration\SwaggerConfig.java
+D:\Workspace\Applications\MoviesApp\src\main\java\com\projects\moviesapp\configuration\ApplicationConfig.java
+D:\Workspace\Applications\MoviesApp\src\main\java\com\projects\moviesapp\models\MovieDetails.java
+D:\Workspace\Applications\MoviesApp\src\main\java\com\projects\moviesapp\services\impl\MovieDetailsImplementation.java
+D:\Workspace\Applications\MoviesApp\src\main\java\com\projects\moviesapp\services\MovieDetailsService.java
+D:\Workspace\Applications\MoviesApp\src\main\java\com\projects\moviesapp\reqresmodels\RatingModel.java
+D:\Workspace\Applications\MoviesApp\src\main\java\com\projects\moviesapp\controllers\AppController.java
