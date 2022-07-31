@@ -36,9 +36,8 @@ public class SwaggerConfig {
     }
 
     private ApiInfo apiInfo() {
-        return new ApiInfoBuilder().title("JavaInUse API")
-                .description("JavaInUse API reference for developers")
-                .contact("support@org.com")
-                .licenseUrl("support@org.com").version("1.0").build();
+        return new ApiInfoBuilder().title("Movies API")
+                .description("API reference for developers")
+                .version("1.0").build();
     }
 }

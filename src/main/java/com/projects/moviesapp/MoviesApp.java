@@ -15,6 +15,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication(scanBasePackages = {"com.projects.moviesapp"})
 public class MoviesApp {
 
+    /**
+     * Staring point of application
+     */
+    
     public static void main(String[] args) {
         System.setProperty("spring.devtools.restart.enabled", "true");
         SpringApplication.run(MoviesApp.class, args);

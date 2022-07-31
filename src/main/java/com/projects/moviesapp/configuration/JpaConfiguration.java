@@ -40,7 +40,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 public class JpaConfiguration {
 
     @Autowired
-    private Environment environment;
+    private final Environment environment;
 
     public JpaConfiguration(Environment e) {
         this.environment = e;

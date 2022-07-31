@@ -1,9 +1,14 @@
+com\projects\moviesapp\configuration\SwaggerConfig.class
+com\projects\moviesapp\reqresmodels\MovieSearchResponse.class
 com\projects\moviesapp\components\MovieDetailsComponent.class
+com\projects\moviesapp\apimodels\Ratings.class
 com\projects\moviesapp\configuration\JpaConfiguration.class
-com\projects\moviesapp\models\MovieDetails_.class
 com\projects\moviesapp\services\impl\MovieDetailsImplementation.class
 com\projects\moviesapp\MoviesApp.class
 com\projects\moviesapp\dao\MovieDetailsDAO.class
+com\projects\moviesapp\reqresmodels\RatingModel.class
+com\projects\moviesapp\apimodels\MovieDetailsResponse.class
 com\projects\moviesapp\services\MovieDetailsService.class
 com\projects\moviesapp\models\MovieDetails.class
+com\projects\moviesapp\configuration\ApplicationConfig.class
 com\projects\moviesapp\controllers\AppController.class

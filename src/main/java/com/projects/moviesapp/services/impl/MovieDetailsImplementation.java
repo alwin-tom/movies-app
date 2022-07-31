@@ -10,7 +10,6 @@ import com.projects.moviesapp.models.MovieDetails;
 import com.projects.moviesapp.services.MovieDetailsService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -39,6 +38,14 @@ public class MovieDetailsImplementation implements MovieDetailsService {
         return movieDetailsDAO.save(movieDetails);
     }
 
+    /**
+     * Find movie by movieId and IMDB ID and update the rating
+     *
+     * @param movieId
+     * @param imdbId
+     * @param rating
+     * @return
+     */
     @Override
     @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
     public MovieDetails updateByMovieIdandImdbId(Integer movieId, String imdbId, Integer rating) {
@@ -51,6 +58,11 @@ public class MovieDetailsImplementation implements MovieDetailsService {
         return movieDetailsDAO.save(movieDetails);
     }
 
+    /**
+     * Sort the 1st 10 records sorted by average rating and theatre gross
+     *
+     * @return
+     */
     @Override
     public List<MovieDetails> findTrendingMovies() {
         List<MovieDetails> page = movieDetailsDAO.findTrendingMovies(

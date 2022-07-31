@@ -33,19 +33,26 @@ public class AppController {
     @Autowired
     MovieDetailsComponent movieDetailsComponent;
 
-    @GetMapping(value = "/test")
-    public String test() {
-        return "Hello world!";
-    }
-
+    /**
+     * use: For searching movies by comparing DB and OMDB API
+     *
+     * @param movieName
+     * @return Movie Search Response
+     */
     @GetMapping(value = "/movie", produces = MediaType.APPLICATION_JSON_VALUE)
     public MovieSearchResponse getMovieDetails(@RequestParam("movieName") String movieName) {
 
         MovieSearchResponse movieSearchResponse = new MovieSearchResponse();
+        /**
+         * Check DB
+         */
         MovieDetails movieDetails = movieDetailsComponent.findByMovieName(movieName);
         if (movieDetails != null) {
             movieSearchResponse.setIsMoviePresent(Boolean.TRUE);
 
+            /**
+             * Check API
+             */
             MovieDetailsResponse detailsResponse = movieDetailsComponent.invokeMoviesOMDBApi(movieName);
             if (detailsResponse != null && detailsResponse.getResponse().equals("True")) {
                 movieDetails.setImdbId(detailsResponse.getImdbID());
@@ -63,11 +70,21 @@ public class AppController {
         return movieSearchResponse;
     }
 
+    /**
+     * Add rating
+     *
+     * @param ratingModel
+     * @return
+     */
     @PostMapping(value = "/rating", produces = MediaType.APPLICATION_JSON_VALUE)
     public MovieDetails markRating(@RequestBody RatingModel ratingModel) {
         return movieDetailsComponent.updateByMovieIdandImdbId(ratingModel.getMovieId(), ratingModel.getImdbId(), ratingModel.getRating());
     }
 
+    /**
+     * Get all trending movies by Theatre Gross and rating
+     * @return top 10 movies
+     */
     @GetMapping(value = "/trending", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<MovieDetails> getTrendingMovies() {
         return movieDetailsComponent.findTrendingMovies();
