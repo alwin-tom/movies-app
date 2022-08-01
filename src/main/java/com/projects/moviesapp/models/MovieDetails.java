@@ -5,6 +5,7 @@
  */
 package com.projects.moviesapp.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -21,11 +22,13 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import lombok.Builder;
 
 /**
  *
  * @author Preetom
  */
+@Builder(toBuilder = true)
 @Entity
 @Table(name = "movie_details")
 @XmlRootElement
@@ -61,8 +64,10 @@ public class MovieDetails implements Serializable {
     private Float averageRating;
     @Column(name = "created")
     @Temporal(TemporalType.DATE)
+    @JsonIgnore
     private Date created;
     @Column(name = "is_deleted")
+    @JsonIgnore
     private Boolean isDeleted;
     @Basic(optional = false)
     @NotNull
@@ -88,6 +93,20 @@ public class MovieDetails implements Serializable {
 
     public MovieDetails(Integer movieId, String imdbId, int totalRatings, String poster) {
         this.movieId = movieId;
+        this.imdbId = imdbId;
+        this.totalRatings = totalRatings;
+        this.poster = poster;
+    }
+
+    public MovieDetails(Integer movieId, String movieName, Boolean hasWonOscar, Double theatreGross, Float averageRating,
+            Date created, Boolean isDeleted, String imdbId, int totalRatings, String poster) {
+        this.movieId = movieId;
+        this.movieName = movieName;
+        this.hasWonOscar = hasWonOscar;
+        this.theatreGross = theatreGross;
+        this.averageRating = averageRating;
+        this.created = created;
+        this.isDeleted = isDeleted;
         this.imdbId = imdbId;
         this.totalRatings = totalRatings;
         this.poster = poster;
@@ -197,5 +216,5 @@ public class MovieDetails implements Serializable {
     public String toString() {
         return "com.projects.moviesapp.models.MovieDetails[ movieId=" + movieId + " ]";
     }
-    
+
 }

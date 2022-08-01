@@ -39,7 +39,7 @@ public interface MovieDetailsDAO extends JpaRepository<MovieDetails, Integer> {
     public MovieDetails findByMovieIdandImdbId(Integer movieId, String imdbId);
 
     /**
-     * Find movies with avg rating greater than 0
+     * Find movies with average rating greater than 0
      *
      * @param pageable
      * @return

@@ -1,5 +1,6 @@
 D:\Workspace\Applications\git\movies-app\src\main\java\com\projects\moviesapp\apimodels\MovieDetailsResponse.java
 D:\Workspace\Applications\git\movies-app\src\main\java\com\projects\moviesapp\components\MovieDetailsComponent.java
+D:\Workspace\Applications\git\movies-app\src\main\java\com\projects\moviesapp\errorhandlers\MoviesAppErrorHandler.java
 D:\Workspace\Applications\git\movies-app\src\main\java\com\projects\moviesapp\models\MovieDetails.java
 D:\Workspace\Applications\git\movies-app\src\main\java\com\projects\moviesapp\dao\MovieDetailsDAO.java
 D:\Workspace\Applications\git\movies-app\src\main\java\com\projects\moviesapp\reqresmodels\RatingModel.java
@@ -7,6 +8,7 @@ D:\Workspace\Applications\git\movies-app\src\main\java\com\projects\moviesapp\ap
 D:\Workspace\Applications\git\movies-app\src\main\java\com\projects\moviesapp\configuration\JpaConfiguration.java
 D:\Workspace\Applications\git\movies-app\src\main\java\com\projects\moviesapp\configuration\SwaggerConfig.java
 D:\Workspace\Applications\git\movies-app\src\main\java\com\projects\moviesapp\controllers\AppController.java
+D:\Workspace\Applications\git\movies-app\src\main\java\com\projects\moviesapp\reqresmodels\ErrorModel.java
 D:\Workspace\Applications\git\movies-app\src\main\java\com\projects\moviesapp\configuration\ApplicationConfig.java
 D:\Workspace\Applications\git\movies-app\src\main\java\com\projects\moviesapp\services\MovieDetailsService.java
 D:\Workspace\Applications\git\movies-app\src\main\java\com\projects\moviesapp\MoviesApp.java

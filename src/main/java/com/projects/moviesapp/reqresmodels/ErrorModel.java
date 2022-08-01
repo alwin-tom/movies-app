@@ -5,19 +5,18 @@
  */
 package com.projects.moviesapp.reqresmodels;
 
-import lombok.Builder;
-import lombok.Data;
-
 /**
  *
  * @author Preetom
  */
-@Data
-@Builder
-public class RatingModel {
+public class ErrorModel {
 
-    public Integer rating;
-    public Integer movieId;
-    public String imdbId;
+    public Boolean status;
+    public String message;
+
+    public ErrorModel(Boolean s, String m) {
+        this.status = s;
+        this.message = m;
+    }
 
 }

@@ -42,8 +42,8 @@ public class JpaConfiguration {
     @Autowired
     private final Environment environment;
 
-    public JpaConfiguration(Environment e) {
-        this.environment = e;
+    public JpaConfiguration(Environment systemEnvironment) {
+        this.environment = systemEnvironment;
     }
 
     @Value("${datasource.moviesapp.maxPoolSize:10}")

@@ -17,6 +17,7 @@ public class MoviesApp {
 
     /**
      * Staring point of application
+     * @param args
      */
     
     public static void main(String[] args) {

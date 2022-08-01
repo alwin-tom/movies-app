@@ -3,21 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.projects.moviesapp.reqresmodels;
-
-import lombok.Builder;
-import lombok.Data;
+package com.projects.moviesapp.errorhandlers;
 
 /**
  *
  * @author Preetom
  */
-@Data
-@Builder
-public class RatingModel {
+public class UnAuthorisedError extends Exception {
 
-    public Integer rating;
-    public Integer movieId;
-    public String imdbId;
+    public UnAuthorisedError(String exceptionDetails) {
+        super(exceptionDetails);
+    }
 
 }

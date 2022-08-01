@@ -9,6 +9,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.projects.moviesapp.apimodels.MovieDetailsResponse;
 import com.projects.moviesapp.models.MovieDetails;
+import com.projects.moviesapp.reqresmodels.MovieSearchResponse;
 import com.projects.moviesapp.services.MovieDetailsService;
 import java.util.Arrays;
 import java.util.List;
@@ -40,8 +41,8 @@ public class MovieDetailsComponent {
     @Autowired
     RestTemplate restTemplate;
 
-    MovieDetailsComponent(Environment e) {
-        this.environment = e;
+    MovieDetailsComponent(Environment systemEnvironment) {
+        this.environment = systemEnvironment;
     }
 
     /**
@@ -49,8 +50,35 @@ public class MovieDetailsComponent {
      * @param movieName
      * @return movie details from DB
      */
-    public MovieDetails findByMovieName(String movieName) {
-        return movieDetailsService.findByMovieName(movieName.toUpperCase());
+    public MovieSearchResponse findByMovieName(String movieName) {
+        MovieSearchResponse movieSearchResponse = new MovieSearchResponse();
+        /**
+         * Check DB
+         */
+        MovieDetails movieDetails = movieDetailsService.findByMovieName(movieName.toUpperCase());
+        if (movieDetails != null) {
+            movieSearchResponse.setIsMoviePresent(Boolean.TRUE);
+
+            /**
+             * Check API
+             */
+            MovieDetailsResponse detailsResponse = invokeMoviesOMDBApi(movieName);
+            if (detailsResponse != null && detailsResponse.getResponse().equals("True")) {
+
+                movieDetails = movieDetails.toBuilder().imdbId(detailsResponse.getImdbID())
+                        .poster(detailsResponse.getPoster())
+                        .theatreGross(Double.parseDouble(detailsResponse.getBoxOffice().replaceAll("\\$", "").replaceAll(",", "")))
+                        .build();
+                movieDetails = movieDetailsService.update(movieDetails);
+
+                movieSearchResponse.setMovieDetailsResponse(detailsResponse);
+            }
+            movieSearchResponse.setMovieDetails(movieDetails);
+
+        } else {
+            movieSearchResponse.setIsMoviePresent(Boolean.FALSE);
+        }
+        return movieSearchResponse;
     }
 
     /**
@@ -74,7 +102,7 @@ public class MovieDetailsComponent {
         );
 
         /**
-         * Check if the API call is successfull
+         * Check if the API call is successful
          */
         if (response.getStatusCode().is2xxSuccessful()) {
             try {
