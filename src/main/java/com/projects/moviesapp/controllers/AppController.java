@@ -35,12 +35,12 @@ public class AppController {
     /**
      * use: For searching movies by comparing DB and OMDB API
      *
-     * @param myNumber
+     * @param clientToken
      * @param movieName
      * @return Movie Search Response
      */
     @GetMapping(value = "/movie")
-    public MovieSearchResponse getMovieDetails(@RequestHeader("client-token") int myNumber,
+    public MovieSearchResponse getMovieDetails(@RequestHeader("client-token") String clientToken,
             @RequestParam("movieName") String movieName) {
         return movieDetailsComponent.findByMovieName(movieName);
     }
@@ -48,12 +48,12 @@ public class AppController {
     /**
      * Add rating
      *
-     * @param myNumber
+     * @param clientToken
      * @param ratingModel
      * @return
      */
     @PostMapping(value = "/rating")
-    public MovieDetails markRating(@RequestHeader("client-token") int myNumber,
+    public MovieDetails markRating(@RequestHeader("client-token") String clientToken,
             @RequestBody RatingModel ratingModel) {
         return movieDetailsComponent.updateByMovieIdandImdbId(ratingModel.getMovieId(), ratingModel.getImdbId(), ratingModel.getRating());
     }
@@ -61,11 +61,11 @@ public class AppController {
     /**
      * Get all trending movies by Theatre Gross and rating
      *
-     * @param myNumber
+     * @param clientToken
      * @return top 10 movies
      */
     @GetMapping(value = "/trending")
-    public List<MovieDetails> getTrendingMovies(@RequestHeader("client-token") int myNumber) {
+    public List<MovieDetails> getTrendingMovies(@RequestHeader("client-token") String clientToken) {
         return movieDetailsComponent.findTrendingMovies();
     }
 }

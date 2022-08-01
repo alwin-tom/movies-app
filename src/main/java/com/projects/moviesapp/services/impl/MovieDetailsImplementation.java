@@ -51,10 +51,12 @@ public class MovieDetailsImplementation implements MovieDetailsService {
     public MovieDetails updateByMovieIdandImdbId(Integer movieId, String imdbId, Integer rating) {
         MovieDetails movieDetails = movieDetailsDAO.findByMovieIdandImdbId(movieId, imdbId);
         Float totalRating = movieDetails.getAverageRating() * movieDetails.getTotalRatings();
-        movieDetails.setTotalRatings(movieDetails.getTotalRatings() + 1);
-        Float newRating = (totalRating + rating) / movieDetails.getTotalRatings();
-        movieDetails.setAverageRating(newRating);
-
+        movieDetails = movieDetails.toBuilder()
+                .totalRatings(movieDetails.getTotalRatings() + 1)
+                .build();
+        movieDetails = movieDetails.toBuilder()
+                .averageRating((totalRating + rating) / movieDetails.getTotalRatings())
+                .build();
         return movieDetailsDAO.save(movieDetails);
     }
 
