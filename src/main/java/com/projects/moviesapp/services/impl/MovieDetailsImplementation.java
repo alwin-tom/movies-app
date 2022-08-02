@@ -48,8 +48,8 @@ public class MovieDetailsImplementation implements MovieDetailsService {
      */
     @Override
     @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
-    public MovieDetails updateByMovieIdandImdbId(Integer movieId, String imdbId, Integer rating) {
-        MovieDetails movieDetails = movieDetailsDAO.findByMovieIdandImdbId(movieId, imdbId);
+    public MovieDetails updateByMovieIdAndImdbId(Integer movieId, String imdbId, Integer rating) {
+        MovieDetails movieDetails = movieDetailsDAO.findByMovieIdAndImdbId(movieId, imdbId);
         Float totalRating = movieDetails.getAverageRating() * movieDetails.getTotalRatings();
         movieDetails = movieDetails.toBuilder()
                 .totalRatings(movieDetails.getTotalRatings() + 1)

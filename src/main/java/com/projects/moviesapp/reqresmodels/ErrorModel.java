@@ -14,9 +14,9 @@ public class ErrorModel {
     public Boolean status;
     public String message;
 
-    public ErrorModel(Boolean s, String m) {
-        this.status = s;
-        this.message = m;
+    public ErrorModel(Boolean status, String message) {
+        this.status = status;
+        this.message = message;
     }
 
 }

@@ -133,8 +133,8 @@ public class MovieDetailsComponent {
      * @param rating
      * @return
      */
-    public MovieDetails updateByMovieIdandImdbId(Integer movieId, String imdbId, Integer rating) {
-        return movieDetailsService.updateByMovieIdandImdbId(movieId, imdbId, rating);
+    public MovieDetails updateByMovieIdAndImdbId(Integer movieId, String imdbId, Integer rating) {
+        return movieDetailsService.updateByMovieIdAndImdbId(movieId, imdbId, rating);
     }
 
     /**

@@ -24,7 +24,7 @@ URL: /v1/trending
 Method: GET
 
  ## API Token
- All the APIs exposed through this application is expected to receive an API token with key name **client-token**. As a part of the current solution, the validation of the token is only considered towards the existance of the same in the request header. The value of client secret can be a String value and needs to be passed as a part of the header. 
+ All the APIs exposed through this application is expected to receive an API token with key name **client-token**. As a part of the current solution, the validation of the token is only considered towards the existence of the same in the request header. The value of client secret can be a String value and needs to be passed as a part of the header. 
 
 ## Solution approach
 
@@ -215,13 +215,9 @@ Movie Search API responds with a response as depicted below
 		"movieDetailsResponse"
 	]
 }
-~~~
+~~~  
 
-  
-
-  
-
-3. Rating is made on a scale of 1 to 5. The application will save the total response count and average rating and update the same as and when new ratings are made. Once the rating is successfully made, the API will respond with a data in the following JSON schema.
+3. Rating is made on a scale of 1 to 5. The application will save the total response count and average rating and update the same as and when new ratings are made. Once the rating is successfully made, the API will respond with data in the following JSON schema.
 
 ~~~
 

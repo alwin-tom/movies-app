@@ -36,7 +36,7 @@ public interface MovieDetailsDAO extends JpaRepository<MovieDetails, Integer> {
      * @return MovieDetails
      */
     @Query(value = "SELECT e FROM MovieDetails e where e.movieId = ?1 and e.imdbId = ?2 and e.isDeleted = false")
-    public MovieDetails findByMovieIdandImdbId(Integer movieId, String imdbId);
+    public MovieDetails findByMovieIdAndImdbId(Integer movieId, String imdbId);
 
     /**
      * Find movies with average rating greater than 0

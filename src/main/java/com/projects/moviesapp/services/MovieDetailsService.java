@@ -18,7 +18,7 @@ public interface MovieDetailsService {
 
     public MovieDetails update(MovieDetails movieDetails);
 
-    public MovieDetails updateByMovieIdandImdbId(Integer movieId, String imdbId, Integer rating);
+    public MovieDetails updateByMovieIdAndImdbId(Integer movieId, String imdbId, Integer rating);
 
     public List<MovieDetails> findTrendingMovies();
 }

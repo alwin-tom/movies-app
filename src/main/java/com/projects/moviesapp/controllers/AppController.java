@@ -55,7 +55,7 @@ public class AppController {
     @PostMapping(value = "/rating")
     public MovieDetails markRating(@RequestHeader("client-token") String clientToken,
             @RequestBody RatingModel ratingModel) {
-        return movieDetailsComponent.updateByMovieIdandImdbId(ratingModel.getMovieId(), ratingModel.getImdbId(), ratingModel.getRating());
+        return movieDetailsComponent.updateByMovieIdAndImdbId(ratingModel.getMovieId(), ratingModel.getImdbId(), ratingModel.getRating());
     }
 
     /**
