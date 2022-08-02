@@ -15,7 +15,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.HttpClientErrorException;
@@ -34,11 +38,12 @@ public class AppControllerTest {
 
     @Test
     public void getMovieDetailsFailedSenario() throws URISyntaxException {
-        RestTemplate restTemplate = new RestTemplate();
         final String baseUrl = "http://localhost:" + randomServerPort + "/v1/movie?movieName=DUMMY";
         URI uri = new URI(baseUrl);
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("client-token", "sample-client-token");
 
-        ResponseEntity<MovieSearchResponse> result = restTemplate.getForEntity(uri, MovieSearchResponse.class);
+        ResponseEntity<MovieSearchResponse> result = new TestRestTemplate().exchange(uri, HttpMethod.GET, new HttpEntity<>(headers), MovieSearchResponse.class);
 
         Assert.assertEquals(200, result.getStatusCodeValue());
         Assert.assertEquals(true, result.getBody() != null);
@@ -48,11 +53,12 @@ public class AppControllerTest {
 
     @Test
     public void getMovieDetailsSuccessScenario() throws URISyntaxException {
-        RestTemplate restTemplate = new RestTemplate();
         final String baseUrl = "http://localhost:" + randomServerPort + "/v1/movie?movieName=Inception";
         URI uri = new URI(baseUrl);
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("client-token", "sample-client-token");
 
-        ResponseEntity<MovieSearchResponse> result = restTemplate.getForEntity(uri, MovieSearchResponse.class);
+        ResponseEntity<MovieSearchResponse> result = new TestRestTemplate().exchange(uri, HttpMethod.GET, new HttpEntity<>(headers), MovieSearchResponse.class);
 
         Assert.assertEquals(200, result.getStatusCodeValue());
         Assert.assertEquals(true, result.getBody() != null);
@@ -62,11 +68,12 @@ public class AppControllerTest {
 
     @Test
     public void getMovieDetailsBadRequest() throws URISyntaxException {
-        RestTemplate restTemplate = new RestTemplate();
         final String baseUrl = "http://localhost:" + randomServerPort + "/v1/movie";
         URI uri = new URI(baseUrl);
         try {
-            restTemplate.getForEntity(uri, MovieSearchResponse.class);
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("client-token", "sample-client-token");
+            new TestRestTemplate().exchange(uri, HttpMethod.GET, new HttpEntity<>(headers), MovieSearchResponse.class);
             Assert.fail();
         } catch (HttpClientErrorException ex) {
             Assert.assertEquals(400, ex.getRawStatusCode());
@@ -75,12 +82,28 @@ public class AppControllerTest {
     }
 
     @Test
+    public void getMovieDetailsUnauthorisedRequest() throws URISyntaxException {
+        final String baseUrl = "http://localhost:" + randomServerPort + "/v1/movie";
+        URI uri = new URI(baseUrl);
+        try {
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("client-token-invalid", "sample-client-token");
+            new TestRestTemplate().exchange(uri, HttpMethod.GET, new HttpEntity<>(headers), MovieSearchResponse.class);
+            Assert.fail();
+        } catch (HttpClientErrorException ex) {
+            Assert.assertEquals(401, ex.getRawStatusCode());
+        }
+
+    }
+
+    @Test
     public void getTrending() throws URISyntaxException {
-        RestTemplate restTemplate = new RestTemplate();
         final String baseUrl = "http://localhost:" + randomServerPort + "/v1/trending";
         URI uri = new URI(baseUrl);
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("client-token", "sample-client-token");
 
-        ResponseEntity<Object[]> result = restTemplate.getForEntity(uri, Object[].class);
+        ResponseEntity<Object[]> result = new TestRestTemplate().exchange(uri, HttpMethod.GET, new HttpEntity<>(headers), Object[].class);
 
         Assert.assertEquals(200, result.getStatusCodeValue());
         Assert.assertEquals(true, result.getBody() != null);
@@ -90,17 +113,19 @@ public class AppControllerTest {
 
     @Test
     public void getMarkRating() throws URISyntaxException {
-        RestTemplate restTemplate = new RestTemplate();
         final String baseUrl = "http://localhost:" + randomServerPort + "/v1/rating";
         URI uri = new URI(baseUrl);
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("client-token", "sample-client-token");
 
         RatingModel ratingModel = RatingModel.builder()
                 .imdbId("tt1375666")
                 .movieId(3)
                 .rating(4)
                 .build();
-
-        ResponseEntity<MovieDetails> result = restTemplate.postForEntity(uri, ratingModel, MovieDetails.class);
+        HttpEntity<RatingModel> entity = new HttpEntity<>(ratingModel, headers);
+        
+        ResponseEntity<MovieDetails> result = new TestRestTemplate().exchange(uri, HttpMethod.POST, entity, MovieDetails.class);
 
         Assert.assertEquals(200, result.getStatusCodeValue());
         Assert.assertEquals(true, result.getBody() != null);
