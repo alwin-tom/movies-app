@@ -20,6 +20,7 @@ import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.HttpClientErrorException;
@@ -70,14 +71,10 @@ public class AppControllerTest {
     public void getMovieDetailsBadRequest() throws URISyntaxException {
         final String baseUrl = "http://localhost:" + randomServerPort + "/v1/movie";
         URI uri = new URI(baseUrl);
-        try {
-            HttpHeaders headers = new HttpHeaders();
-            headers.set("client-token", "sample-client-token");
-            new TestRestTemplate().exchange(uri, HttpMethod.GET, new HttpEntity<>(headers), MovieSearchResponse.class);
-            Assert.fail();
-        } catch (HttpClientErrorException ex) {
-            Assert.assertEquals(400, ex.getRawStatusCode());
-        }
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("client-token", "sample-client-token");
+        ResponseEntity<MovieSearchResponse> result = new TestRestTemplate().exchange(uri, HttpMethod.GET, new HttpEntity<>(headers), MovieSearchResponse.class);
+        Assert.assertEquals(HttpStatus.BAD_REQUEST, result.getStatusCode());
 
     }
 
@@ -85,14 +82,11 @@ public class AppControllerTest {
     public void getMovieDetailsUnauthorisedRequest() throws URISyntaxException {
         final String baseUrl = "http://localhost:" + randomServerPort + "/v1/movie";
         URI uri = new URI(baseUrl);
-        try {
-            HttpHeaders headers = new HttpHeaders();
-            headers.set("client-token-invalid", "sample-client-token");
-            new TestRestTemplate().exchange(uri, HttpMethod.GET, new HttpEntity<>(headers), MovieSearchResponse.class);
-            Assert.fail();
-        } catch (HttpClientErrorException ex) {
-            Assert.assertEquals(401, ex.getRawStatusCode());
-        }
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("client-token-invalid", "sample-client-token");
+        ResponseEntity<MovieSearchResponse> result = new TestRestTemplate().exchange(uri, HttpMethod.GET, new HttpEntity<>(headers), MovieSearchResponse.class);
+        System.out.println(result.getStatusCode());
+        Assert.assertEquals(HttpStatus.UNAUTHORIZED, result.getStatusCode());
 
     }
 
@@ -124,7 +118,7 @@ public class AppControllerTest {
                 .rating(4)
                 .build();
         HttpEntity<RatingModel> entity = new HttpEntity<>(ratingModel, headers);
-        
+
         ResponseEntity<MovieDetails> result = new TestRestTemplate().exchange(uri, HttpMethod.POST, entity, MovieDetails.class);
 
         Assert.assertEquals(200, result.getStatusCodeValue());
