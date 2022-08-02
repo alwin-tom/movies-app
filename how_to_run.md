@@ -47,6 +47,12 @@ $ ng serve
 
 ~~~
 ### Database configuration
+
+As a part of database configuration, necessary SQL for managing database is provided in the file **Movies App - DB Queries.sql**. The same is also avaliable in https://github.com/alwin-tom/movies-app-db. It contains 3 different parts
+1. Create DB
+2. Create table movie-details
+3. Insert data provided in CSV
+
 The current designed solution is based on MySQL database and the properties for the same are a part of the **application.properties** file. While running we have cross check and make sure that the database connection properties are updated towards the database which we are connecting to. The properties include 
  1. Host name (IP address)
  2. User name
